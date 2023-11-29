@@ -170,7 +170,7 @@ def find_alignment(
     medfilt_width: int = 7,
     qk_scale: float = 1.0,
 ) -> List[WordTiming]:
-    if len(text_tokens) == 0:
+    if not text_tokens:
         return []
 
     tokens = torch.tensor(
@@ -300,7 +300,7 @@ def add_word_timestamps(
     append_punctuations: str = "\"'.。,，!！?？:：”)]}、",
     **kwargs,
 ):
-    if len(segments) == 0:
+    if not segments:
         return
 
     text_tokens_per_segment = [
@@ -335,7 +335,7 @@ def add_word_timestamps(
             saved_tokens += len(timing.tokens)
             word_index += 1
 
-        if len(words) > 0:
+        if words:
             segment["start"] = words[0]["start"]
             # hack: prefer the segment-level end timestamp if the last word is too long.
             # a better segmentation algorithm based on VAD should be able to replace this.
